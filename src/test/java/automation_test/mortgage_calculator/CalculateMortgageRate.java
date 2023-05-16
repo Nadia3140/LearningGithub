@@ -13,20 +13,7 @@ import page_objects.Home;
 import page_objects.NavigationBar;
 
 
-public class CalculateMortgageRate {
-    WebDriver driver;
-
-
-    @BeforeMethod
-    public void OpenBrowser() {
-        WebDriverManager.chromedriver().setup();
-        ChromeOptions options = new ChromeOptions();
-        options.addArguments("--remote-allow-origins=*");
-        driver = new ChromeDriver(options);
-        ActOn.browser(driver).openBrowser("https://www.mortgagecalculator.org/");
-
-    }
-
+public class CalculateMortgageRate extends BaseClass{
     @Test
     public void calculateMonthlyPayment() {
         String[] date = DateUtils.returnNextMonth();
@@ -49,10 +36,5 @@ public class CalculateMortgageRate {
                 .selectBuyOrRefinance("Buy")
                 .clickOnCalculateButton()
                 .validateTotalMonthlyPayment("1,611.85");
-    }
-
-    @AfterMethod
-    public void closeBrowser() {
-        driver.quit();
     }
 }
